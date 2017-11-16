@@ -36,10 +36,9 @@ class BeamerToLight:
     def event(self, event):
         if event.type == pygame.QUIT:
             self._running = False
-        if event.type == pygame.VIDEORESIZE:
+        elif event.type == pygame.VIDEORESIZE:
             self.size = self.width, self.height = event.size
-            print(self.size)
-        if event.type == pygame.KEYDOWN:
+        elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
                 self._running = False
             elif event.key == pygame.K_F11:
@@ -49,8 +48,15 @@ class BeamerToLight:
                 else:
                     self.size = self.width, self.height = 60*16, 60*9
                     self.display_window()
+            elif event.key == pygame.K_F5:
+                if self.fullscreen:
+                    self.display_fullscreen()
+                else:
+                    self.display_window()
             else:
                 print(event)
+        else:
+            print(event)
 
     def loop(self):
         now = time()
