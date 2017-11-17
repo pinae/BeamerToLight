@@ -22,7 +22,7 @@ class BeamerToLight:
         self.last_beat_pressed_time = None
         self.last_beat = time()
         self.last_frame_time = time()
-        self.animation = animations.single_circle
+        self.animation = animations.point_circle
         self.animation_direction = 1
 
     def display_window(self):
@@ -87,6 +87,14 @@ class BeamerToLight:
                 self.animation = animations.vertical_line
             elif event.scancode == 41:
                 self.animation = animations.double_wave
+            elif event.scancode == 42:
+                self.animation = animations.bony_horizontal_line
+            elif event.scancode == 43:
+                self.animation = animations.point_circle
+            elif event.scancode == 44:
+                self.animation = animations.point_circle_10
+            elif event.scancode == 45:
+                self.animation = animations.rotating_bone_1
             else:
                 print(event)
         #else:
