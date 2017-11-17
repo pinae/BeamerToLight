@@ -2,8 +2,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import division, print_function, unicode_literals
 import pygame
-from animations import *
-from moods import gray, fire, water
+import animations
+import effects
+from moods import *
 from time import time
 
 
@@ -14,13 +15,14 @@ class BeamerToLight:
         self.size = self.width, self.height = 60*16, 60*9
         self.fullscreen = False
         self.animation_pos = 0.0
+        self.effect_animation_pos = 0.0
         self.current_mood = gray
-        self.beat = [1.0]
+        self.beat = [5.0]
         self.beat_valid = False
         self.last_beat_pressed_time = None
         self.last_beat = time()
         self.last_frame_time = time()
-        self.animation = single_circle
+        self.animation = animations.single_circle
         self.animation_direction = 1
 
     def display_window(self):
@@ -78,11 +80,13 @@ class BeamerToLight:
             elif event.scancode == 26:
                 self.current_mood = water
             elif event.scancode == 38:
-                self.animation = single_circle
+                self.animation = animations.single_circle
             elif event.scancode == 39:
-                self.animation = horizontal_line
+                self.animation = animations.horizontal_line
             elif event.scancode == 40:
-                self.animation = vertical_line
+                self.animation = animations.vertical_line
+            elif event.scancode == 41:
+                self.animation = animations.double_wave
             else:
                 print(event)
         #else:
@@ -99,6 +103,7 @@ class BeamerToLight:
             self.last_beat += beat
             self.animation_direction *= -1
         self.animation_pos = (self.animation_pos + self.animation_direction * elapsed_time / beat) % 1
+        self.effect_animation_pos = (self.effect_animation_pos + elapsed_time / (beat * 4)) % 1
         self.last_frame_time = now
 
     def render(self):
@@ -108,11 +113,12 @@ class BeamerToLight:
         self.apply_effects(surface)
         pygame.display.flip()
 
-    @staticmethod
-    def apply_effects(surface):
+    def apply_effects(self, surface):
         keys = pygame.key.get_pressed()
         if keys[pygame.K_SPACE]:
-            surface.fill((255, 255, 255))
+            effects.flash(surface, self.effect_animation_pos)
+        elif keys[252]:
+            effects.wave(surface, self.effect_animation_pos)
 
     @staticmethod
     def cleanup():
