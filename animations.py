@@ -119,12 +119,22 @@ def rotating_bone_1(surface, progress, mood):
              int(pos_y - cos(alpha) * 3.5 * w),
              w, color)
     filled_polygon(surface, [
-        (int(pos_x - sin(alpha) * 3.5 * w + sin(alpha + pi) * w / 2),
-         int(pos_y - cos(alpha) * 3.5 * w + cos(alpha + pi) * w / 2)),
-        (int(pos_x - sin(alpha) * 3.5 * w - sin(alpha + pi) * w / 2),
-         int(pos_y - cos(alpha) * 3.5 * w - cos(alpha + pi) * w / 2)),
-        (int(pos_x + sin(alpha) * 3.5 * w + sin(alpha + pi) * w / 2),
-         int(pos_y + cos(alpha) * 3.5 * w + cos(alpha + pi) * w / 2)),
-        (int(pos_x + sin(alpha) * 3.5 * w - sin(alpha + pi) * w / 2),
-         int(pos_y + cos(alpha) * 3.5 * w - cos(alpha + pi) * w / 2))
+        (int(pos_x - sin(alpha) * 3.5 * w + sin(alpha + pi / 2) * w / 2),
+         int(pos_y - cos(alpha) * 3.5 * w + cos(alpha + pi / 2) * w / 2)),
+        (int(pos_x - sin(alpha) * 3.5 * w - sin(alpha + pi / 2) * w / 2),
+         int(pos_y - cos(alpha) * 3.5 * w - cos(alpha + pi / 2) * w / 2)),
+        (int(pos_x + sin(alpha) * 3.5 * w - sin(alpha + pi / 2) * w / 2),
+         int(pos_y + cos(alpha) * 3.5 * w - cos(alpha + pi / 2) * w / 2)),
+        (int(pos_x + sin(alpha) * 3.5 * w + sin(alpha + pi / 2) * w / 2),
+         int(pos_y + cos(alpha) * 3.5 * w + cos(alpha + pi / 2) * w / 2))
         ], color)
+    aapolygon(surface, [
+        (int(pos_x - sin(alpha) * 3.5 * w + sin(alpha + pi / 2) * w / 2),
+         int(pos_y - cos(alpha) * 3.5 * w + cos(alpha + pi / 2) * w / 2)),
+        (int(pos_x - sin(alpha) * 3.5 * w - sin(alpha + pi / 2) * w / 2),
+         int(pos_y - cos(alpha) * 3.5 * w - cos(alpha + pi / 2) * w / 2)),
+        (int(pos_x + sin(alpha) * 3.5 * w - sin(alpha + pi / 2) * w / 2),
+         int(pos_y + cos(alpha) * 3.5 * w - cos(alpha + pi / 2) * w / 2)),
+        (int(pos_x + sin(alpha) * 3.5 * w + sin(alpha + pi / 2) * w / 2),
+         int(pos_y + cos(alpha) * 3.5 * w + cos(alpha + pi / 2) * w / 2))
+    ], color)
