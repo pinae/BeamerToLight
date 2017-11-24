@@ -8,7 +8,7 @@ from moods import *
 from time import time
 
 
-class BeamerToLight:
+class BeamerAsLight:
     def __init__(self):
         self._running = True
         self._display_surf = None
@@ -144,5 +144,5 @@ class BeamerToLight:
 
 
 if __name__ == "__main__":
-    application = BeamerToLight()
+    application = BeamerAsLight()
     application.execute()
