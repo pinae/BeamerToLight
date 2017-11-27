@@ -31,9 +31,9 @@ class BeamerAsLight:
 
     def display_fullscreen(self):
         modes = pygame.display.list_modes()
-        modes.sort(key=lambda x: x[0]+x[1], reverse=True)
-        self._display_surf = pygame.display.set_mode(modes[0], pygame.FULLSCREEN)
-        self.size = self.width, self.height = modes[0]
+        modes.sort(key=lambda x: x[0]+x[1])
+        self._display_surf = pygame.display.set_mode(modes[-1], pygame.FULLSCREEN)
+        self.size = self.width, self.height = modes[-1]
 
     def init(self):
         pygame.init()
