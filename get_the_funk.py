@@ -27,7 +27,7 @@ class BeamerAsLight:
 
     def display_window(self):
         self._display_surf = pygame.display.set_mode(self.size, pygame.RESIZABLE)
-        pygame.display.set_caption("c't Beamer to Light")
+        pygame.display.set_caption("c't Beamer as Light")
 
     def display_fullscreen(self):
         modes = pygame.display.list_modes()
@@ -63,13 +63,13 @@ class BeamerAsLight:
             elif event.key == pygame.K_RETURN:
                 if self.last_beat_pressed_time:
                     if not self.beat_valid:
-                        print("Now i have a new delta so i'm deleting the previous times.")
+                        print("New time and new delta: Deleting the previous times.")
                         self.beat = []
                     self.beat.append(time() - self.last_beat_pressed_time)
                     self.beat_valid = True
                 else:
                     self.beat_valid = False
-                    print("Now i have a now time but no delta.")
+                    print("New time but no delta.")
                 self.last_beat_pressed_time = time()
                 print(self.beat_valid)
                 print(self.beat)
