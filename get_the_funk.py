@@ -79,6 +79,22 @@ class BeamerAsLight:
                 self.current_mood = fire
             elif event.scancode == 26:
                 self.current_mood = water
+            elif event.scancode == 27:
+                self.current_mood = green
+            elif event.scancode == 28:
+                self.current_mood = yellow
+            elif event.scancode == 29:
+                self.current_mood = pink
+            elif event.scancode == 30:
+                self.current_mood = red
+            elif event.scancode == 31:
+                self.current_mood = bluered
+            elif event.scancode == 32:
+                self.current_mood = yellowpink
+            elif event.scancode == 33:
+                self.current_mood = brown
+            elif event.scancode == 34:
+                self.current_mood = cyan
             elif event.scancode == 38:
                 self.animation = animations.single_circle
             elif event.scancode == 39:
