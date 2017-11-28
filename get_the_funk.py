@@ -173,6 +173,8 @@ class BeamerAsLight:
             effects.snowflakes(surface, self.effect_animation_pos)
         elif 55 in self.unknown_keys_dict and keys[self.unknown_keys_dict[55]]:
             effects.snowflakes(surface, self.effect_animation_pos)
+        elif 56 in self.unknown_keys_dict and keys[self.unknown_keys_dict[56]]:
+            surface.fill((0, 0, 0))
 
     @staticmethod
     def cleanup():
