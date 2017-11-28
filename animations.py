@@ -94,47 +94,59 @@ def point_circle_10(surface, progress, mood):
     point_circle(surface, progress, mood, num_points=10)
 
 
-def rotating_bone_1(surface, progress, mood):
+def rotating_bones(surface, progress, mood, count=4):
     width, height = surface.get_size()
     w = width // 40
     r = min(width - 9 * w, height - 9 * w) // 2
-    alpha = progress * 2 * pi
-    pos_x = width // 2 + sin(alpha/4) * r
-    pos_y = height // 2 + cos(alpha/4) * r
-    color = mood.primary_color
-    filled_circle(surface,
-                  int(pos_x + sin(alpha) * 3.5 * w),
-                  int(pos_y + cos(alpha) * 3.5 * w),
-                  w, color)
-    aacircle(surface,
-             int(pos_x + sin(alpha) * 3.5 * w),
-             int(pos_y + cos(alpha) * 3.5 * w),
-             w, color)
-    filled_circle(surface,
-                  int(pos_x - sin(alpha) * 3.5 * w),
-                  int(pos_y - cos(alpha) * 3.5 * w),
-                  w, color)
-    aacircle(surface,
-             int(pos_x - sin(alpha) * 3.5 * w),
-             int(pos_y - cos(alpha) * 3.5 * w),
-             w, color)
-    filled_polygon(surface, [
-        (int(pos_x - sin(alpha) * 3.5 * w + sin(alpha + pi / 2) * w / 2),
-         int(pos_y - cos(alpha) * 3.5 * w + cos(alpha + pi / 2) * w / 2)),
-        (int(pos_x - sin(alpha) * 3.5 * w - sin(alpha + pi / 2) * w / 2),
-         int(pos_y - cos(alpha) * 3.5 * w - cos(alpha + pi / 2) * w / 2)),
-        (int(pos_x + sin(alpha) * 3.5 * w - sin(alpha + pi / 2) * w / 2),
-         int(pos_y + cos(alpha) * 3.5 * w - cos(alpha + pi / 2) * w / 2)),
-        (int(pos_x + sin(alpha) * 3.5 * w + sin(alpha + pi / 2) * w / 2),
-         int(pos_y + cos(alpha) * 3.5 * w + cos(alpha + pi / 2) * w / 2))
+    for i in range(count):
+        alpha = progress * 2 * pi + i * pi * 8 / count
+        pos_x = width // 2 + sin(alpha/4) * r * (count > 1)
+        pos_y = height // 2 + cos(alpha/4) * r * (count > 1)
+        if i % 2 == 0:
+            color = mood.primary_color
+        else:
+            color = mood.secondary_color
+        filled_circle(surface,
+                      int(pos_x + sin(alpha) * 3.5 * w),
+                      int(pos_y + cos(alpha) * 3.5 * w),
+                      w, color)
+        aacircle(surface,
+                 int(pos_x + sin(alpha) * 3.5 * w),
+                 int(pos_y + cos(alpha) * 3.5 * w),
+                 w, color)
+        filled_circle(surface,
+                      int(pos_x - sin(alpha) * 3.5 * w),
+                      int(pos_y - cos(alpha) * 3.5 * w),
+                      w, color)
+        aacircle(surface,
+                 int(pos_x - sin(alpha) * 3.5 * w),
+                 int(pos_y - cos(alpha) * 3.5 * w),
+                 w, color)
+        filled_polygon(surface, [
+            (int(pos_x - sin(alpha) * 3.5 * w + sin(alpha + pi / 2) * w / 2),
+             int(pos_y - cos(alpha) * 3.5 * w + cos(alpha + pi / 2) * w / 2)),
+            (int(pos_x - sin(alpha) * 3.5 * w - sin(alpha + pi / 2) * w / 2),
+             int(pos_y - cos(alpha) * 3.5 * w - cos(alpha + pi / 2) * w / 2)),
+            (int(pos_x + sin(alpha) * 3.5 * w - sin(alpha + pi / 2) * w / 2),
+             int(pos_y + cos(alpha) * 3.5 * w - cos(alpha + pi / 2) * w / 2)),
+            (int(pos_x + sin(alpha) * 3.5 * w + sin(alpha + pi / 2) * w / 2),
+             int(pos_y + cos(alpha) * 3.5 * w + cos(alpha + pi / 2) * w / 2))
+            ], color)
+        aapolygon(surface, [
+            (int(pos_x - sin(alpha) * 3.5 * w + sin(alpha + pi / 2) * w / 2),
+             int(pos_y - cos(alpha) * 3.5 * w + cos(alpha + pi / 2) * w / 2)),
+            (int(pos_x - sin(alpha) * 3.5 * w - sin(alpha + pi / 2) * w / 2),
+             int(pos_y - cos(alpha) * 3.5 * w - cos(alpha + pi / 2) * w / 2)),
+            (int(pos_x + sin(alpha) * 3.5 * w - sin(alpha + pi / 2) * w / 2),
+             int(pos_y + cos(alpha) * 3.5 * w - cos(alpha + pi / 2) * w / 2)),
+            (int(pos_x + sin(alpha) * 3.5 * w + sin(alpha + pi / 2) * w / 2),
+             int(pos_y + cos(alpha) * 3.5 * w + cos(alpha + pi / 2) * w / 2))
         ], color)
-    aapolygon(surface, [
-        (int(pos_x - sin(alpha) * 3.5 * w + sin(alpha + pi / 2) * w / 2),
-         int(pos_y - cos(alpha) * 3.5 * w + cos(alpha + pi / 2) * w / 2)),
-        (int(pos_x - sin(alpha) * 3.5 * w - sin(alpha + pi / 2) * w / 2),
-         int(pos_y - cos(alpha) * 3.5 * w - cos(alpha + pi / 2) * w / 2)),
-        (int(pos_x + sin(alpha) * 3.5 * w - sin(alpha + pi / 2) * w / 2),
-         int(pos_y + cos(alpha) * 3.5 * w - cos(alpha + pi / 2) * w / 2)),
-        (int(pos_x + sin(alpha) * 3.5 * w + sin(alpha + pi / 2) * w / 2),
-         int(pos_y + cos(alpha) * 3.5 * w + cos(alpha + pi / 2) * w / 2))
-    ], color)
+
+
+def rotating_bone_circle(surface, progress, mood):
+    rotating_bones(surface, progress, mood, count=20)
+
+
+def rotating_bone_1(surface, progress, mood):
+    rotating_bones(surface, progress, mood, count=1)

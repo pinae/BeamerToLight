@@ -113,6 +113,14 @@ class BeamerAsLight:
                 self.animation = animations.point_circle_10
             elif event.scancode == 45:
                 self.animation = animations.rotating_bone_1
+            elif event.scancode == 46:
+                self.animation = animations.rotating_bones
+            elif event.scancode == 47:
+                self.animation = animations.rotating_bone_circle
+            elif event.scancode == 48:
+                pass
+            elif event.scancode == 51:
+                pass
             else:
                 print(event)
         #else:
