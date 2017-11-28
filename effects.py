@@ -12,7 +12,6 @@ def flash(surface, _):
 
 
 def wave(surface, pos):
-    surface.fill((0, 0, 0))
     width, height = surface.get_size()
     w = width // 40
     color = (int(max(0.0, sin(pos*2*pi))*255),

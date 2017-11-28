@@ -24,6 +24,7 @@ class BeamerAsLight:
         self.last_frame_time = time()
         self.animation = animations.point_circle
         self.animation_direction = 1
+        self.unknown_keys_dict = {}
 
     def display_window(self):
         self._display_surf = pygame.display.set_mode(self.size, pygame.RESIZABLE)
@@ -75,6 +76,10 @@ class BeamerAsLight:
                 print(self.beat)
             elif event.key == 9:
                 self.animation_direction = -1 * self.animation_direction
+            elif event.scancode == 20:
+                self.beat = [2 * b for b in self.beat]
+            elif event.scancode == 61:
+                self.beat = [0.5 * b for b in self.beat]
             elif event.scancode == 24:
                 self.current_mood = gray
             elif event.scancode == 25:
@@ -122,16 +127,15 @@ class BeamerAsLight:
             elif event.scancode == 51:
                 pass
             else:
-                print(event)
-        #else:
-        #    print(event)
+                if event.scancode not in self.unknown_keys_dict:
+                    self.unknown_keys_dict[event.scancode] = event.key
 
     def loop(self):
         now = time()
         elapsed_time = now - self.last_frame_time
         beat = sum(self.beat) / len(self.beat)
         keys = pygame.key.get_pressed()
-        if keys[313]:
+        if keys[313] or keys[301]:
             beat = 2*beat
         if keys[304]:
             beat = beat/2
@@ -159,9 +163,15 @@ class BeamerAsLight:
         keys = pygame.key.get_pressed()
         if keys[pygame.K_SPACE]:
             effects.flash(surface, self.effect_animation_pos)
-        elif keys[252]:
+        elif 52 in self.unknown_keys_dict and keys[self.unknown_keys_dict[52]]:
+            surface.fill((0, 0, 0))
             effects.wave(surface, self.effect_animation_pos)
-        elif keys[246]:
+        elif 53 in self.unknown_keys_dict and keys[self.unknown_keys_dict[53]]:
+            effects.wave(surface, self.effect_animation_pos)
+        elif 54 in self.unknown_keys_dict and keys[self.unknown_keys_dict[54]]:
+            surface.fill((0, 0, 0))
+            effects.snowflakes(surface, self.effect_animation_pos)
+        elif 55 in self.unknown_keys_dict and keys[self.unknown_keys_dict[55]]:
             effects.snowflakes(surface, self.effect_animation_pos)
 
     @staticmethod
