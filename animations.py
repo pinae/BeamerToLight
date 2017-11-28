@@ -3,6 +3,7 @@
 from __future__ import division, print_function, unicode_literals
 from pygame.gfxdraw import aacircle, filled_circle, bezier, filled_polygon, aapolygon
 from math import sqrt, sin, cos, pi
+import random
 
 
 def single_circle(surface, progress, mood):
@@ -150,3 +151,20 @@ def rotating_bone_circle(surface, progress, mood):
 
 def rotating_bone_1(surface, progress, mood):
     rotating_bones(surface, progress, mood, count=1)
+
+
+def snow(surface, progress, mood, seed=1):
+    width, height = surface.get_size()
+    w = width // 40
+    random.seed(a=seed)
+    layers = [[(random.random()*width, random.random()*(height+2*w)) for _ in range((6-i)*10)] for i in range(6)]
+    for i, positions in enumerate(layers):
+        if i % 2 > 0:
+            color = mood.primary_color
+        else:
+            color = mood.secondary_color
+        for x, y in positions:
+            filled_circle(surface, int(x), int((y + progress * (i+1)/6 * (height+2*w)) % (height+2*w) - w),
+                          w//(6-i), color)
+            aacircle(surface, int(x), int((y + progress * (i+1)/6 * (height+2*w)) % (height+2*w) - w),
+                     w//(6-i), color)

@@ -118,7 +118,7 @@ class BeamerAsLight:
             elif event.scancode == 47:
                 self.animation = animations.rotating_bone_circle
             elif event.scancode == 48:
-                pass
+                self.animation = animations.snow
             elif event.scancode == 51:
                 pass
             else:
@@ -161,6 +161,8 @@ class BeamerAsLight:
             effects.flash(surface, self.effect_animation_pos)
         elif keys[252]:
             effects.wave(surface, self.effect_animation_pos)
+        elif keys[246]:
+            effects.snowflakes(surface, self.effect_animation_pos)
 
     @staticmethod
     def cleanup():

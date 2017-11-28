@@ -3,6 +3,8 @@
 from __future__ import division, print_function, unicode_literals
 from pygame.gfxdraw import bezier
 from math import sin, pi
+from animations import snow
+from moods import Mood
 
 
 def flash(surface, _):
@@ -29,3 +31,7 @@ def wave(surface, pos):
             (int(pos * width - width / 2), height + i),
             (int(pos * width), height // 2 + i)
         ], 16, color)
+
+
+def snowflakes(surface, pos):
+    snow(surface, pos, Mood((255, 255, 255), (220, 220, 220)), seed=2)
