@@ -9,10 +9,12 @@ from time import time
 
 
 class BeamerAsLight:
+    DEFAULT_SIZE = 60*16, 60*9
+
     def __init__(self):
         self._running = False
         self._display_surf = None
-        self.size = self.width, self.height = 60*16, 60*9
+        self.windowsize = self.size = self.width, self.height = self.DEFAULT_SIZE
         self.fullscreen = False
         self.animation_pos = 0.0
         self.effect_animation_pos = 0.0
@@ -25,6 +27,12 @@ class BeamerAsLight:
         self.animation = animations.point_circle
         self.animation_direction = 1
         self.unknown_keys_dict = {}
+
+    def update_display(self):
+        if self.fullscreen:
+            self.display_fullscreen()
+        else:
+            self.display_window()
 
     def display_window(self):
         self._display_surf = pygame.display.set_mode(self.size, pygame.RESIZABLE)
@@ -46,21 +54,20 @@ class BeamerAsLight:
             self._running = False
         elif event.type == pygame.VIDEORESIZE:
             self.size = self.width, self.height = event.size
+            self.update_display()
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
                 self._running = False
             elif event.key == pygame.K_F11:
                 self.fullscreen = not self.fullscreen
                 if self.fullscreen:
+                    self.windowsize = self.size
                     self.display_fullscreen()
                 else:
-                    self.size = self.width, self.height = 60*16, 60*9
+                    self.size = self.windowsize
                     self.display_window()
             elif event.key == pygame.K_F5:
-                if self.fullscreen:
-                    self.display_fullscreen()
-                else:
-                    self.display_window()
+                self.update_display()
             elif event.key == pygame.K_RETURN:
                 if self.last_beat_pressed_time:
                     if not self.beat_valid:
