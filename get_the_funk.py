@@ -10,7 +10,7 @@ from time import time
 
 class BeamerAsLight:
     def __init__(self):
-        self._running = True
+        self._running = False
         self._display_surf = None
         self.size = self.width, self.height = 60*16, 60*9
         self.fullscreen = False
