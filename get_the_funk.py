@@ -19,6 +19,7 @@ class BeamerAsLight:
         self.current_mood = gray
         self.beat = [5.0]
         self.beat_valid = False
+        self.beat_limit = 15
         self.last_beat_pressed_time = None
         self.last_beat = time()
         self.last_frame_time = time()
@@ -31,13 +32,13 @@ class BeamerAsLight:
         pygame.display.set_caption("c't Beamer as Light")
 
     def display_fullscreen(self):
-        modes = pygame.display.list_modes()
-        modes.sort(key=lambda x: x[0]+x[1])
-        self._display_surf = pygame.display.set_mode(modes[-1], pygame.FULLSCREEN)
-        self.size = self.width, self.height = modes[-1]
+        pygame.display.set_mode((self.fullscreen_w,self.fullscreen_h),pygame.FULLSCREEN)
+        self.size = self.width, self.height = self.fullscreen_w, self.fullscreen_h
 
     def init(self):
         pygame.init()
+        self.fullscreen_w = pygame.display.Info().current_w
+        self.fullscreen_h = pygame.display.Info().current_h
         self.display_window()
         return True
 
@@ -63,11 +64,15 @@ class BeamerAsLight:
                     self.display_window()
             elif event.key == pygame.K_RETURN:
                 if self.last_beat_pressed_time:
-                    if not self.beat_valid:
-                        print("New time and new delta: Deleting the previous times.")
-                        self.beat = []
-                    self.beat.append(time() - self.last_beat_pressed_time)
-                    self.beat_valid = True
+                    delta = time() - self.last_beat_pressed_time
+                    if delta < self.beat_limit:
+                        if not self.beat_valid:
+                            print("New time and new delta: Deleting the previous times.")
+                            self.beat = []
+                            self.beat_valid = True
+                        self.beat.append( delta )
+                    else:
+                        print("First delta exceeds limit. Wait for new delta.")
                 else:
                     self.beat_valid = False
                     print("New time but no delta.")
