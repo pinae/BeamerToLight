@@ -80,7 +80,8 @@ class BeamerAsLight:
                 print(self.beat_valid)
                 print(self.beat)
             elif event.key == 9:
-                self.animation_direction = -1 * self.animation_direction
+                self.last_beat = time();
+                self.animation_direction *= -1
             elif event.scancode == 20:
                 self.beat = [2 * b for b in self.beat]
             elif event.scancode == 61:
