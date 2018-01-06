@@ -14,7 +14,8 @@ class BeamerAsLight:
     def __init__(self):
         self._running = False
         self._display_surf = None
-        self.windowsize = self.size = self.width, self.height = self.DEFAULT_SIZE
+        self.window_size = self.size = self.width, self.height = self.DEFAULT_SIZE
+        self.fullscreen_w, self.fullscreen_h = self.window_size
         self.fullscreen = False
         self.animation_pos = 0.0
         self.effect_animation_pos = 0.0
@@ -40,7 +41,7 @@ class BeamerAsLight:
         pygame.display.set_caption("c't Beamer as Light")
 
     def display_fullscreen(self):
-        pygame.display.set_mode((self.fullscreen_w,self.fullscreen_h),pygame.FULLSCREEN)
+        pygame.display.set_mode((self.fullscreen_w, self.fullscreen_h), pygame.FULLSCREEN)
         self.size = self.width, self.height = self.fullscreen_w, self.fullscreen_h
 
     def init(self):
@@ -62,10 +63,10 @@ class BeamerAsLight:
             elif event.key == pygame.K_F11:
                 self.fullscreen = not self.fullscreen
                 if self.fullscreen:
-                    self.windowsize = self.size
+                    self.window_size = self.size
                     self.display_fullscreen()
                 else:
-                    self.size = self.windowsize
+                    self.size = self.window_size
                     self.display_window()
             elif event.key == pygame.K_F5:
                 self.update_display()
@@ -77,7 +78,7 @@ class BeamerAsLight:
                             print("New time and new delta: Deleting the previous times.")
                             self.beat = []
                             self.beat_valid = True
-                        self.beat.append( delta )
+                        self.beat.append(delta)
                     else:
                         print("First delta exceeds limit. Wait for new delta.")
                 else:
