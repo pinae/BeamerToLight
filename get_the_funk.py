@@ -90,11 +90,11 @@ class BeamerAsLight:
             elif event.key == 9:
                 self.last_beat = time()
                 self.animation_direction *= -1
-            elif event.scancode == 20:
+            elif event.scancode == 20:  # ß on german keyboard, - on english keyboard
                 self.beat = [2 * b for b in self.beat]
-            elif event.scancode == 61:
+            elif event.scancode == 61:  # 0 key
                 self.beat = [0.5 * b for b in self.beat]
-            elif event.scancode == 24:
+            elif event.scancode == 24:  # leftmost key in the upper row of letters
                 self.current_mood = gray
             elif event.scancode == 25:
                 self.current_mood = fire
@@ -116,7 +116,7 @@ class BeamerAsLight:
                 self.current_mood = brown
             elif event.scancode == 34:
                 self.current_mood = cyan
-            elif event.scancode == 38:
+            elif event.scancode == 38:  # leftmost key in the middle row
                 self.animation = animations.single_circle
             elif event.scancode == 39:
                 self.animation = animations.horizontal_line
@@ -177,9 +177,9 @@ class BeamerAsLight:
         keys = pygame.key.get_pressed()
         if keys[pygame.K_SPACE]:
             effects.flash(surface, self.effect_animation_pos)
-        elif 52 in self.unknown_keys_dict and keys[self.unknown_keys_dict[52]]:
-            surface.fill((0, 0, 0))
-            effects.wave(surface, self.effect_animation_pos)
+        elif 52 in self.unknown_keys_dict and keys[self.unknown_keys_dict[52]]:  # Second key on the left side of the
+            surface.fill((0, 0, 0))                                              # third row of letters. Z on english
+            effects.wave(surface, self.effect_animation_pos)                     # keyboards, Y on german keyboards.
         elif 53 in self.unknown_keys_dict and keys[self.unknown_keys_dict[53]]:
             effects.wave(surface, self.effect_animation_pos)
         elif 54 in self.unknown_keys_dict and keys[self.unknown_keys_dict[54]]:
